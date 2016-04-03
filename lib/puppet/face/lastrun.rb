@@ -1,7 +1,7 @@
 require 'puppet'
 require 'puppet/face'
 
-Puppet::Face.define(:lastrun, '0.1.0') do
+Puppet::Face.define(:lastrun, '0.1.1') do
   summary "Info on your last puppet run the easy way"
   copyright "Geoff Williams", 2016
   license "Apache 2"
