@@ -1,0 +1,14 @@
+{
+  "name": "geoffwilliams/lastrun_face",
+  "version": "0.1.0",
+  "author": "geoffwilliams",
+  "summary": "info on your last puppet run the easy way",
+  "license": "Apache-2.0",
+  "source": "https://github.com/GeoffWilliams/lastrun_face",
+  "project_page": "https://github.com/GeoffWilliams/lastrun_face",
+  "issues_url": "https://github.com/GeoffWilliams/lastrun_face/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
