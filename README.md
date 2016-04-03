@@ -1,5 +1,4 @@
 # lastrun_face
-<<<<<<< HEAD
 
 #### Table of Contents
 
@@ -46,6 +45,3 @@ agent node at least once before the command becomes available
 ## Development
 PR's please :)
 
-=======
-info on your last puppet run the easy way
->>>>>>> fb361717d09cfd7b7ed9ae859b2a5d75457afd22
