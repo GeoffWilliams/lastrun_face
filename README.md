@@ -25,17 +25,36 @@ You will have access to the new subcommand after this
 Once installed, you will have access to two new Puppet sub-commands on all
 nodes:
 
+### Classes loaded during last Puppet run
+
 ```shell
 puppet lastrun classes
 ```
-Classes loaded during last Puppet run
 
+### Resources loaded during last Puppet run
 
 ```shell
 puppet lastrun resources
 ```
-Resources loaded during last Puppet run
 
+### Was Code Manager configured to be active during last Puppet run?
+
+```shell
+puppet lastrun code_manager
+```
+Note:  Only makes sense on a PE Master
+
+### Was filesync configured to be active during last Puppet run?
+
+```shell
+puppet lastrun filesync
+```
+
+### Was Puppet configured to use a static catalogue on the last Puppet run?
+
+```shell
+puppet lastrun static_catalogs
+```
 
 ## Limitations
 
