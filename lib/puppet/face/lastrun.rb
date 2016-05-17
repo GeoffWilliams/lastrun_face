@@ -27,7 +27,7 @@ Puppet::Face.define(:lastrun, '0.2.0') do
     summary "Was filesync active on last puppet run?"
 
     when_invoked do |options|
-      classes = %x[puppet config print resourcefile].strip
+      classes = %x[puppet config print classfile].strip
       if classes.include?("puppet_enterprise::master::file_sync")
         status = "on"
       elsif classes.include?("puppet_enterprise::master::file_sync_disabled")
@@ -43,7 +43,7 @@ Puppet::Face.define(:lastrun, '0.2.0') do
     summary "Is code manager active (masters only)?"
 
     when_invoked do |options| 
-      classes = %x[puppet config print resourcefile].strip
+      classes = %x[puppet config print classfile].strip
       if classes.include?("puppet_enterprise::master::code_manager")
         status = "on"
       else
@@ -57,8 +57,8 @@ Puppet::Face.define(:lastrun, '0.2.0') do
     summary "Are static catalogs being used?"
     
     when_invoked do |options|
-      client_datadir = %x[puppet agent --configprint client_datadir]
-      fqdn = %x[facter fqdn]
+      client_datadir = %x[puppet agent --configprint client_datadir].strip
+      fqdn = %x[facter fqdn].strip
       sep = File::SEPARATOR
       catalog_file = "#{client_datadir}#{sep}catalog#{sep}#{fqdn}.json"
       parsed = JSON.parse(File.read(catalog_file))
