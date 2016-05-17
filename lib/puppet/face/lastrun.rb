@@ -28,10 +28,12 @@ Puppet::Face.define(:lastrun, '0.2.0') do
 
     when_invoked do |options|
       classes = File.read(%x[puppet config print classfile].strip)
-      if classes.include?("puppet_enterprise::master::file_sync")
-        status = "on"
-      elsif classes.include?("puppet_enterprise::master::file_sync_disabled")
+      # reversed order to avoid false positive partial match on 
+      # puppet_enterprise::master::file_sync
+      if classes.include?("puppet_enterprise::master::file_sync_disabled")
         status = "off"
+      elsif classes.include?("puppet_enterprise::master::file_sync")
+        status = "on"
       else
         status = "indeterminate"
       end
