@@ -1,6 +1,6 @@
 {
   "name": "geoffwilliams/lastrun_face",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "geoffwilliams",
   "summary": "info on your last puppet run the easy way",
   "license": "Apache-2.0",
@@ -11,4 +11,3 @@
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
   ]
 }
-
