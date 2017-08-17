@@ -25,6 +25,21 @@ Puppet::Face.define(:lastrun, '0.3.0') do
     end
   end
 
+
+  action :catalog do
+    summary "Last applied catalog"
+
+    when_invoked do |options|
+      catalog_file = File.join(
+        %x[puppet config print client_datadir].strip, 
+        "catalog", 
+        %x[puppet config print certname].strip
+      ) + '.json'
+
+      puts JSON.pretty_generate(JSON.parse(File.read(catalog_file)))
+    end
+  end
+
   action :filesync do
     summary "Was filesync active on last puppet run?"
 

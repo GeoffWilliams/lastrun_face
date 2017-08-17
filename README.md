@@ -135,6 +135,12 @@ puppet lastrun classes
 puppet lastrun resources
 ```
 
+#### Last puppet catalog applied
+
+```shell
+puppet lastrun catalog
+```
+
 #### Was Code Manager configured to be active during last Puppet run?
 
 ```shell
