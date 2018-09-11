@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/GeoffWilliams/lastrun_face.svg?branch=master)](https://travis-ci.org/GeoffWilliams/lastrun_face)
 # lastrun_face
 
 #### Table of Contents
