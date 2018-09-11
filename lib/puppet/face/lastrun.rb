@@ -22,6 +22,11 @@ Puppet::Face.define(:lastrun, '0.5.0') do
       end.empty? && begin
         puts MISSING_MSG
       end
+
+      # must return something to caller or it will print `false` in the output
+      # stream after the code has run )if we iterated list due to evaluation
+      # of the block itself as the return type... :/
+      nil
     end
   end
 
@@ -34,6 +39,8 @@ Puppet::Face.define(:lastrun, '0.5.0') do
       end.empty? && begin
         puts MISSING_MSG
       end
+
+      nil
     end
   end
 
@@ -46,7 +53,6 @@ Puppet::Face.define(:lastrun, '0.5.0') do
       json_pp = json.empty? ? MISSING_MSG : JSON.pretty_generate(json)
 
       puts json_pp
-
     end
   end
 
