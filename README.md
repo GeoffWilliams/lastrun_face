@@ -10,7 +10,10 @@
 
 ## Overview
 
-A Puppet Face to display the classes and resources used in your last Puppet run and the last known status of some of the new Puppet Enterprise sub-systems which are also made available via Facter as custom facts.  This allows the current status to be checked via the console.
+A Puppet Face to display the classes and resources used in your last Puppet run
+and the last known status of some of the new Puppet Enterprise sub-systems which
+are also made available via Facter as custom facts.  This allows the current 
+status to be checked via the console.
 
 ## Setup
 
@@ -28,22 +31,35 @@ nodes:
 
 
 #### Information about last puppet run
-This is designed to be a simple interface to enable monitoring of Puppet systems using external tools such as Nagios, Pager Duty, Sumo, etc
+This is designed to be a simple interface to enable monitoring of Puppet systems
+using external tools such as Nagios, Pager Duty, Sumo, etc
 
 ```shell
 puppet lastrun info
 ```
-Will return a JSON hash with very limited information about the last puppet run.  The data is parsed from the YAML file at `puppet agent --configprint lastrunreport` so if you want more info (there's a lot...) you could just parse this file directly.  The advantage of this comand is that this logic is already done for you and we also check to see if the agent is disabled.
 
-Inside the returned JSON, the key `alarm` indicates whether there is a problem running puppet on this host.  The following conditions will cause an alarm:
+Will return a JSON hash with very limited information about the last puppet run.
+The data is parsed from the YAML file at 
+`puppet agent --configprint lastrunreport` so if you want more info (there's a 
+lot...) you could just parse this file directly.  The advantage of this command
+is that this logic is already done for you and we also check to see if the agent
+is disabled.
+
+Inside the returned JSON, the key `alarm` indicates whether there is a problem
+running puppet on this host.  The following conditions will cause an alarm:
 * `status` != `unchanged` and `changed`
 * Report is older then 1 hour
 * No report is found
 * Agent is disabled (`puppet agent --disable`)
 
-Alarms are aways accompanied by a human-readable translation of the problem encountered, see examples below.
+Alarms are aways accompanied by a human-readable translation of the problem
+encountered, see examples below.
 
-Of course, if your not able to run the command at all or it returns an error, then your system has even bigger problems, such as no puppet agent installed, face not installed on master (or in this environment), or hell.. maybe SSH doesn't even work ;-).  Be sure to catch such conditions as well with your reporting system and alarm on them appropriately.
+Of course, if your not able to run the command at all or it returns an error, 
+then your system has even bigger problems, such as no puppet agent installed, 
+face not installed on master (or in this environment), or hell.. maybe SSH 
+doesn't even work ;-).  Be sure to catch such conditions as well with your 
+reporting system and alarm on them appropriately.
 
 ##### Example output
 
@@ -123,29 +139,30 @@ Of course, if your not able to run the command at all or it returns an error, th
 ```
 
 
-#### Classes loaded during last Puppet run
+#### Classes loaded during last Puppet agent run
 
 ```shell
 puppet lastrun classes
 ```
 
-#### Resources loaded during last Puppet run
+#### Resources loaded during last Puppet agent run
 
 ```shell
 puppet lastrun resources
 ```
 
-#### Last puppet catalog applied
+#### Last Puppet catalog applied by agent
 
 ```shell
 puppet lastrun catalog
 ```
 
-#### Was Code Manager configured to be active during last Puppet run?
+#### Was Code Manager configured to be active during last Puppet agent run?
 
 ```shell
 puppet lastrun code_manager
 ```
+
 Note:  Only makes sense on a PE Master
 
 #### Was filesync configured to be active during last Puppet run?
@@ -154,6 +171,8 @@ Note:  Only makes sense on a PE Master
 puppet lastrun filesync
 ```
 
+Note:  Only makes sense on a PE Master
+
 #### Was Puppet configured to use a static catalogue on the last Puppet run?
 
 ```shell
@@ -161,17 +180,43 @@ puppet lastrun static_catalogs
 ```
 
 ### Custom facts
-The following custom facts will be present after installation:
-* `lastrun_code_manager_status`
-* `lastrun_filesync_status`
-* `lastrun_static_catalogs_status`
+The `lastrun` custom structured fact will be present after installation and 
+contains:
+* `code_manager_status`
+* `filesync_status`
+* `static_catalogs_status`
 
-These corresponde to executing the corresponding `puppet lastface` comand _before_ running the Puppet agent.
+**Example**
+
+```json
+"lastrun": {
+  "code_manager_status": "off",
+  "filesync_status": "indeterminate",
+  "static_catalogs_status": "indeterminate"
+}
+```
+
+These correspond to executing the corresponding `puppet lastface` comand 
+_before_ running the Puppet agent.
 
 ## Limitations
 
 Requires the module to be installed on your Puppet Master and run on each
 agent node at least once before the command becomes available
+
+## Testing
+This module supports testing using [PDQTest](https://github.com/declarativesystems/pdqtest).
+
+
+Test can be executed with:
+
+```
+bundle install
+make
+```
+
+See `.travis.yml` for a working CI example
+
 
 ## Development
 PR's please :)

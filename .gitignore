@@ -1,1 +1,9 @@
-pkg
+/spec/fixtures
+Gemfile.lock
+Puppetfile.lock
+.librarian
+.tmp
+.yardoc
+/pkg
+.Puppetfile.pdqtest
+.idea

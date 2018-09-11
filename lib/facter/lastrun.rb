@@ -1,32 +1,21 @@
-# Custom facts exposing status of
+require 'puppet_x/lastrun'
+# Custom fact exposing status of
 # * code manager
 # * filesync
 # * static catalogs
 #
-# Fact names prefixed with lastrun_ to avoid possible future namespace 
-# collisions if this functionality is addressed in-product
-#
-# Test functionality involves using the face that ships with this module
-
-
-# code manager
-Facter.add(:lastrun_code_manager_status) do
+# @example Sample output
+#   "lastrun": {
+#     "code_manager_status": "off",
+#     "filesync_status": "indeterminate",
+#     "static_catalogs_status": "indeterminate"
+#   }
+Facter.add(:lastrun) do
   setcode do
-    Facter::Core::Execution.exec('puppet lastrun code_manager')
-  end
-end
-
-
-# filesync
-Facter.add(:lastrun_filesync_status) do
-  setcode do
-    Facter::Core::Execution.exec('puppet lastrun filesync')
-  end
-end
-
-# static catalogs
-Facter.add(:lastrun_static_catalogs_status) do
-  setcode do
-    Facter::Core::Execution.exec('puppet lastrun static_catalogs')
+    {
+        "code_manager_status"     => PuppetX::LastRun.code_manager_status,
+        "filesync_status"         => PuppetX::LastRun.filesync_status,
+        "static_catalogs_status"  => PuppetX::LastRun.static_catalogs_status,
+    }
   end
 end
