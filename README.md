@@ -1,6 +1,12 @@
 [![Build Status](https://travis-ci.org/GeoffWilliams/lastrun_face.svg?branch=master)](https://travis-ci.org/GeoffWilliams/lastrun_face)
 # lastrun_face
 
+## Deprecated
+Puppet faces are not working correctly in latest PE and are no [longer supported](https://puppet.com/docs/puppet/5.5/deprecated_api.html#puppet-faces-is-a-private-api).
+
+Do not use this module, its no longer supported
+
+
 #### Table of Contents
 
 1. [Overview](#overview)
